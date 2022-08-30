@@ -21,8 +21,7 @@ app.post('/repos', function (req, res) {
       return save(res.data);
     })
     .then(() => {
-      console.log('New repos added!');
-      res.status(200).json('Order Added!');
+      res.status(200).json('New repos Added!');
     })
     .catch(err => {
       console.log('add err: ', err);
