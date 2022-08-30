@@ -1,6 +1,6 @@
 const express = require('express');
 const getReposByUsername = require('../helpers/github').getReposByUsername;
-//const save = require('../database/index').save;
+const save = require('../database/index').save;
 const bp = require('body-parser')
 let app = express();
 app.use(bp.json())
@@ -15,10 +15,18 @@ app.post('/repos', function (req, res) {
   console.log('start post');
   const {username} = req.body;
   console.log('req.body post: ', username);
-  res.send('searched!');
-  getReposByUsername(username)
-    .then(res => {console.log('getRepos data: ', res.data);})
-    .catch(err => {console.log('repos err: ', err);});
+
+  return getReposByUsername(username)
+    .then(res => {
+      return save(res.data);
+    })
+    .then(() => {
+      console.log('New repos added!');
+      res.status(200).json('Order Added!');
+    })
+    .catch(err => {
+      console.log('add err: ', err);
+    });
 
 });
 

@@ -21,10 +21,10 @@ class App extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: term})})
+      body: JSON.stringify({username: term})
+    })
       .then((res) => {
         console.log('get data success!');
-        console.log('search data', res);
       })
       .catch(err => {console.log('search err: ', err); });
   }
