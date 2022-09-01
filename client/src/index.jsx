@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
     // send post request to server
+
     fetch('http://localhost:1128/repos', {
       method: 'POST',
       headers: {
@@ -29,7 +32,24 @@ class App extends React.Component {
       .catch(err => {console.log('search err: ', err); });
   }
 
+  componentDidMount() {
+    fetch('http://localhost:1128/repos')
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('this is an HTTP erro');
+      }
+      return res.json();
+    })
+    .then((repos) => {
+      this.setState({
+        repos: repos
+      });
+      console.log(repos);
+    });
+  }
+
   render () {
+
     return (<div>
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos}/>
