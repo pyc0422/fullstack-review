@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
-import { useState, useEffect } from "react";
 
 
 class App extends React.Component {
@@ -34,25 +33,24 @@ class App extends React.Component {
 
   componentDidMount() {
     fetch('http://localhost:1128/repos')
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('this is an HTTP erro');
-      }
-      return res.json();
-    })
-    .then((repos) => {
-      this.setState({
-        repos: repos
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('this is an HTTP erro');
+        }
+        return res.json();
+      })
+      .then((repos) => {
+        this.setState({
+          repos: repos
+        });
+        console.log(repos);
       });
-      console.log(repos);
-    });
   }
 
   render () {
-
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} total={this.state.total}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }

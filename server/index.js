@@ -38,17 +38,16 @@ app.get('/repos', function (req, res) {
     if (err) throw err;
     const database = db.db('fetcher');
     const repos = database.collection('repos');
-    const cursor = repos.find({}).sort( {forks_count: -1}).limit(25);
+    const cursor = repos.find({}).sort({forks_count: -1}).limit(25)
     var reposArr = [];
+    //console.log(cursor);
     return cursor.forEach(repo => {
       reposArr.push(repo);
     })
     .then(() => {
       console.log(reposArr.length);
       res.status(200).send(JSON.stringify(reposArr));
-    })
-
-
+    });
   });
 
 });
