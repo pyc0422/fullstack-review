@@ -31,7 +31,6 @@ let save = (data) => {
     promises.push(
       Repo.find({repoId: repo.id})
         .then(res => {
-          console.log('res: ',res);
           if (res.length && res.length !== 0) {
             return Repo.update({repoId: repo.id}, repoObj);
           } else {
@@ -41,9 +40,6 @@ let save = (data) => {
     );
   })
   Promise.all(promises)
-    .then(() => {
-      console.log('add to db');
-    });
 
 }
 

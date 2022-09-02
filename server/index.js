@@ -45,7 +45,6 @@ app.get('/repos', function (req, res) {
       reposArr.push(repo);
     })
     .then(() => {
-      console.log(reposArr.length);
       res.status(200).send(JSON.stringify(reposArr));
     });
   });
