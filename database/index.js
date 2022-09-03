@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI||'mongodb://localhost/fetcher', { useNewUrlParser: true, useUnifiedTopology: true });
 
 let repoSchema = mongoose.Schema({
-  // TODO: your schema here!
+
   name: String,
   repoId: Number,
   url: String,
@@ -14,7 +14,6 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (data) => {
-  // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
   var promises = [];
