@@ -3,7 +3,8 @@ const getReposByUsername = require('../helpers/github').getReposByUsername;
 const save = require('../database/index').save;
 const bp = require('body-parser')
 const MongoClient= require('mongodb').MongoClient;
-
+const dotenv = require('dotenv');
+dotenv.config();
 let app = express();
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
@@ -51,7 +52,7 @@ app.get('/repos', function (req, res) {
 
 });
 
-let port = 1128;
+let port = process.env.PORT;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
