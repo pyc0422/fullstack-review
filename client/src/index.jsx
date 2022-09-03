@@ -26,16 +26,27 @@ class App extends React.Component {
       body: JSON.stringify({username: term})
     })
       .then(() => {
-        this.findTop25((repos) => {
-          this.setState({
-            repos: repos
-          });
-        })
+        this.componentDidMount();
       })
       .catch(err => {console.log('search err: ', err); });
   }
 
-  findTop25 (cb) {
+  // findTop25 (cb) {
+  //   fetch('http://localhost:1128/repos')
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw new Error('this is an HTTP erro');
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((repos) => {
+  //       cb(repos);
+  //     })
+  //     .catch(err => {console.log('find err: ', err);});
+  // }
+
+  componentDidMount() {
+    console.log('updated!');
     fetch('http://localhost:1128/repos')
       .then((res) => {
         if (!res.ok) {
@@ -44,25 +55,21 @@ class App extends React.Component {
         return res.json();
       })
       .then((repos) => {
-        cb(repos);
+        this.setState({
+          repos: repos
+        });
       })
       .catch(err => {console.log('find err: ', err);});
   }
 
-  componentDidMount() {
-    console.log('updated!');
-    this.findTop25((repos) => {
-      this.setState({
-        repos: repos
-      });
-    })
-  }
+
 
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+
       <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }

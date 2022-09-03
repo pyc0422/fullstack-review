@@ -17,7 +17,6 @@ let save = (data) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
-  //Repo.createIndexes({repoId: 1}, {unique: true});
   var promises = [];
   data.forEach(repo => {
     const repoObj =  {
@@ -25,7 +24,7 @@ let save = (data) => {
       repoId: repo.id,
       url: repo.html_url,
       description: repo.description,
-      forks_count: repo.forks_count,
+      forks_count: repo.forks,
       username: repo.owner.login
     };
     promises.push(

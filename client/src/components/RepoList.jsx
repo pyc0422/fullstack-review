@@ -12,10 +12,10 @@ const RepoList = (props) => (
 
 const RepoEntry = (props) => (
   <li>
-    <a href={props.repo.url}>{props.repo.name}</a>
-    <a>  User: {props.repo.username}</a>
-    <a>  Folks Counts: {props.repo.forks_count}</a>
-    <div style={{fontSize: '16px'}}>{props.repo.description}</div>
+    <a href={props.repo.url}><b>{props.repo.name}</b>  </a>
+    <b> | User: {props.repo.username}  |  </b>
+    <a style={{fontSize: '12px'}}>  Folks Counts: {props.repo.forks_count}</a>
+    <div style={{fontSize: '12px'}}>{props.repo.description}</div>
   </li>
 )
 
